@@ -54,7 +54,12 @@ export default defineConfig([
     },
 
     settings: {
-      'import/resolver': { typescript: { alwaysTryTypes: true, project: './tsconfig.app.json' } },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.app.json',
+        },
+      },
     },
 
     languageOptions: { ecmaVersion: 2020, globals: globals.browser },

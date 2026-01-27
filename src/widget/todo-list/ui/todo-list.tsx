@@ -1,17 +1,25 @@
 import { TodoItem } from '@/entities/todo-item';
-import { RemoveTodoButton, useTodoStore } from '@/feature/todo';
+import { AddTodoButton, RemoveTodoButton, useTodoStore } from '@/feature/todo';
 
 export const TodoList = () => {
-  const todos = useTodoStore((s) => s.tasks);
+  const tasks = useTodoStore((s) => s.tasks);
+  const addTask = useTodoStore((s) => s.addTask);
+  const updateTask = useTodoStore((s) => s.updateTask);
+  const removeTask = useTodoStore((s) => s.removeTask);
+
   return (
     <div className="flex h-150 w-xl flex-col gap-1 rounded-4xl border-2 p-5">
-      {todos.map((todo) => (
+      {tasks.map((task) => (
         <TodoItem
-          text={todo.text}
-          key={todo.id}
-          rightAction={<RemoveTodoButton todoId={todo.id} />}
+          key={task.id}
+          text={task.text}
+          isDraft={task.isDraft}
+          onSubmit={(text) => updateTask(task.id, text)}
+          onCancel={() => removeTask(task.id)}
+          rightAction={<RemoveTodoButton todoId={task.id} />}
         />
       ))}
+      <AddTodoButton onClick={addTask} />
     </div>
   );
 };

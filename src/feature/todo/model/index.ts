@@ -1,1 +1,1 @@
-export type { RemoveTodoButtonProps } from './types';
+export type { RemoveTodoButtonProps, AddTodoButtonProps } from './types';

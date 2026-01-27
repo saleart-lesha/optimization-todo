@@ -4,39 +4,43 @@ import { generateId } from './helpers';
 
 import type { TodoStore } from './types';
 
-export const useTodoStore = create<TodoStore>((set, get) => ({
+export const useTodoStore = create<TodoStore>((set) => ({
   tasks: [
     { id: generateId(), text: 'Сделать домашку', isCompleted: false },
     { id: generateId(), text: 'Купить хлеб', isCompleted: false },
   ],
 
-  createTask: (text) => {
-    const { tasks } = get();
-    const newTask = {
-      id: generateId(),
-      text,
-      isCompleted: false,
-    };
-
-    set({
-      tasks: [newTask, ...tasks],
-    });
+  addTask: () => {
+    set((state) => ({
+      tasks: [
+        {
+          id: generateId(),
+          text: '',
+          isCompleted: false,
+          isDraft: true,
+        },
+        ...state.tasks,
+      ],
+    }));
   },
 
   updateTask: (id, text) => {
-    const { tasks } = get();
-    set({
-      tasks: tasks.map((task) => ({
-        ...task,
-        text: task.id === id ? text : task.text,
-      })),
-    });
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              text,
+              isDraft: false,
+            }
+          : task
+      ),
+    }));
   },
 
   removeTask: (id) => {
-    const { tasks } = get();
-    set({
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    set((state) => ({
+      tasks: state.tasks.filter((task) => task.id !== id),
+    }));
   },
 }));

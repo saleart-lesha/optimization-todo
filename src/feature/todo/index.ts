@@ -1,2 +1,2 @@
-export { RemoveTodoButton } from './ui/remove-todo-button';
+export { RemoveTodoButton, AddTodoButton } from './ui';
 export { useTodoStore } from './store';

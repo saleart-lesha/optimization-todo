@@ -12,8 +12,10 @@ export const MainPage: FC = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#f5f5f5]">
       <div className="flex h-150 w-100 flex-col gap-1 rounded-4xl border bg-white p-4 pt-3 shadow">
-        <span className="pb-2 text-lg font-semibold">Todo</span>
-        <hr className="-mx-4 p-2" />
+        <div className="pb-2">
+          <span className="text-lg font-semibold">Todo</span>
+        </div>
+        <hr className="-mx-4" />
         <TodoList tasks={ActivityTasks} />
         {Boolean(completedTasks.length > 0) && <CompletedList tasks={completedTasks} />}
       </div>

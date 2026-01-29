@@ -33,20 +33,20 @@ export const TodoItem: FC<TodoItemProps> = ({
   };
 
   return (
-    <Item className="group items-start gap-2 p-2" variant="outline">
+    <Item className="group items-start gap-1 p-0">
       <ItemActions>
         <Button
           onClick={() => onSubmit?.(value.trim(), !isCompleted)}
-          className="cursor-pointer rounded-full"
+          className="cursor-pointer rounded-full p-1"
           variant={'ghost'}
-          size={'icon'}
+          size={'none'}
         >
           {isCompleted ? <CheckIcon /> : <Circle />}
         </Button>
       </ItemActions>
       <ItemContent>
         <Textarea
-          className="min-h-9 w-full resize-none overflow-hidden border-none bg-white break-all shadow-none focus:border-none focus:ring-0 focus-visible:border-none focus-visible:ring-0"
+          className="min-h-6 w-full resize-none overflow-hidden border-none bg-white p-0.5 break-all shadow-none focus:border-none focus:ring-0 focus-visible:border-none focus-visible:ring-0"
           rows={1}
           ref={ref}
           value={value}

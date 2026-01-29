@@ -11,9 +11,9 @@ export const RemoveTodoButton: FC<RemoveTodoButtonProps> = ({ todoId }) => {
   const removeTodo = useTodoStore((s) => s.removeTask);
   return (
     <Button
-      className="text-muted-foreground pointer-events-none cursor-pointer opacity-0 transition-all group-hover:pointer-events-auto group-hover:opacity-100 hover:bg-transparent hover:text-black focus-visible:bg-transparent"
+      className="text-muted-foreground pointer-events-none cursor-pointer p-1 opacity-0 transition-all group-hover:pointer-events-auto group-hover:opacity-100 hover:bg-transparent hover:text-black focus-visible:bg-transparent"
       variant="ghost"
-      size="icon"
+      size={'none'}
       onClick={() => removeTodo(todoId)}
     >
       <TrashIcon />

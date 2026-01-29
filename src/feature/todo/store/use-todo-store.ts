@@ -6,7 +6,7 @@ import type { TodoStore } from './types';
 
 export const useTodoStore = create<TodoStore>((set) => ({
   tasks: [
-    { id: generateId(), text: 'Сделать домашку', isCompleted: false },
+    { id: generateId(), text: 'Сделать домашку', isCompleted: true },
     { id: generateId(), text: 'Купить хлеб', isCompleted: false },
   ],
 
@@ -24,7 +24,7 @@ export const useTodoStore = create<TodoStore>((set) => ({
     }));
   },
 
-  updateTask: (id, text) => {
+  updateTask: (id, text, isCompleted) => {
     set((state) => ({
       tasks: state.tasks.map((task) =>
         task.id === id
@@ -32,6 +32,7 @@ export const useTodoStore = create<TodoStore>((set) => ({
               ...task,
               text,
               isDraft: false,
+              isCompleted,
             }
           : task
       ),
@@ -41,6 +42,12 @@ export const useTodoStore = create<TodoStore>((set) => ({
   removeTask: (id) => {
     set((state) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
+    }));
+  },
+
+  removeAllCompletedTasks: () => {
+    set((state) => ({
+      tasks: state.tasks.filter((task) => !task.isCompleted),
     }));
   },
 }));

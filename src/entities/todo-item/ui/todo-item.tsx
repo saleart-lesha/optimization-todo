@@ -1,4 +1,4 @@
-import { Circle } from 'lucide-react';
+import { CheckIcon, Circle } from 'lucide-react';
 import { useEffect, useRef, useState, type FC } from 'react';
 
 import { Button } from '@/shared/ui/button';
@@ -7,7 +7,14 @@ import { Textarea } from '@/shared/ui/textarea';
 
 import type { TodoItemProps } from '../model';
 
-export const TodoItem: FC<TodoItemProps> = ({ rightAction, text, onCancel, onSubmit, isDraft }) => {
+export const TodoItem: FC<TodoItemProps> = ({
+  rightAction,
+  text,
+  onCancel,
+  onSubmit,
+  isDraft,
+  isCompleted = false,
+}) => {
   const [value, setValue] = useState(text);
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -19,17 +26,22 @@ export const TodoItem: FC<TodoItemProps> = ({ rightAction, text, onCancel, onSub
 
   const handleBlur = () => {
     if (!value.trim()) {
-      onCancel();
+      onCancel?.();
     } else {
-      onSubmit(value.trim());
+      onSubmit?.(value.trim(), isCompleted);
     }
   };
 
   return (
     <Item className="group items-start gap-2 p-2" variant="outline">
       <ItemActions>
-        <Button className="cursor-pointer rounded-full" variant={'ghost'} size={'icon'}>
-          <Circle />
+        <Button
+          onClick={() => onSubmit?.(value.trim(), !isCompleted)}
+          className="cursor-pointer rounded-full"
+          variant={'ghost'}
+          size={'icon'}
+        >
+          {isCompleted ? <CheckIcon /> : <Circle />}
         </Button>
       </ItemActions>
       <ItemContent>
@@ -40,6 +52,7 @@ export const TodoItem: FC<TodoItemProps> = ({ rightAction, text, onCancel, onSub
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onBlur={handleBlur}
+          readOnly={isCompleted}
         ></Textarea>
       </ItemContent>
       <ItemActions>{rightAction}</ItemActions>

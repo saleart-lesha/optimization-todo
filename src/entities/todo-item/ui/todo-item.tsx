@@ -46,7 +46,7 @@ export const TodoItem: FC<TodoItemProps> = ({
       </ItemActions>
       <ItemContent>
         <Textarea
-          className="min-h-9 w-full resize-none overflow-hidden border-none bg-white shadow-none focus:border-none focus:ring-0 focus-visible:border-none focus-visible:ring-0"
+          className="min-h-9 w-full resize-none overflow-hidden border-none bg-white break-all shadow-none focus:border-none focus:ring-0 focus-visible:border-none focus-visible:ring-0"
           rows={1}
           ref={ref}
           value={value}

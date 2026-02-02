@@ -17,6 +17,7 @@ export const MainPage: FC = () => {
         </div>
         <hr className="-mx-4" />
         <TodoList tasks={ActivityTasks} />
+        <hr className="-mx-4" />
         {Boolean(completedTasks.length > 0) && <CompletedList tasks={completedTasks} />}
       </div>
     </div>

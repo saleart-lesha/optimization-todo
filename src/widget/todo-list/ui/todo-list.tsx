@@ -10,7 +10,7 @@ export const TodoList: FC<TodoListProps> = ({ tasks }) => {
   const removeTask = useTodoStore((s) => s.removeTask);
 
   return (
-    <div className="flex flex-col">
+    <div className="mb-1.5 flex flex-col">
       <div className="mt-2 mb-2 ml-1">
         <span className="text-md font-semibold">Задачи</span>
       </div>

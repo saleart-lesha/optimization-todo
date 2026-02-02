@@ -31,12 +31,12 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          `group focus-visible:ring-ring/50 flex w-full items-center justify-between rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:ring-[3px]`,
+          `group focus-visible:ring-ring/50 mt-1 flex w-full items-center justify-between rounded-md text-left text-sm font-medium transition-all outline-none focus-visible:ring-[3px]`,
           className
         )}
         {...props}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <ChevronDownIcon className="text-muted-foreground size-4 shrink-0 opacity-0 transition-all duration-200 group-hover:opacity-100 group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-100" />
           {props.text}
         </div>

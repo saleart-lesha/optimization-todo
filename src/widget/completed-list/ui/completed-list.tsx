@@ -22,6 +22,7 @@ export const CompletedList: FC<CompletedListProps> = ({ tasks }) => {
     <Accordion type="single" collapsible defaultValue="completed">
       <AccordionItem value="completed">
         <AccordionTrigger
+          className="text-md -mx-3.75 font-semibold"
           text={
             <div className="flex cursor-pointer gap-1">
               <span>Выполненные</span>
@@ -36,22 +37,24 @@ export const CompletedList: FC<CompletedListProps> = ({ tasks }) => {
             }}
             variant="ghost"
             size="icon"
-            className="rounded-full"
+            className="-mx-1.25 rounded-full"
           >
             <TrashIcon />
           </Button>
         </AccordionTrigger>
 
         <AccordionContent>
-          {tasks.map((task) => (
-            <TodoItem
-              key={task.id}
-              text={task.text}
-              isCompleted={task.isCompleted}
-              onSubmit={(text, isCompleted) => updateTask(task.id, text, isCompleted)}
-              rightAction={<RemoveTodoButton todoId={task.id} />}
-            />
-          ))}
+          <div className="flex flex-col gap-1">
+            {tasks.map((task) => (
+              <TodoItem
+                key={task.id}
+                text={task.text}
+                isCompleted={task.isCompleted}
+                onSubmit={(text, isCompleted) => updateTask(task.id, text, isCompleted)}
+                rightAction={<RemoveTodoButton todoId={task.id} />}
+              />
+            ))}
+          </div>
         </AccordionContent>
       </AccordionItem>
     </Accordion>

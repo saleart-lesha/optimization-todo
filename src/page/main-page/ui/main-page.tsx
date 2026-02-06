@@ -16,7 +16,7 @@ export const MainPage: FC = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#f5f5f5]">
-      <div className="relative flex h-150 w-100 flex-col gap-1 rounded-4xl border bg-white pt-3 shadow">
+      <div className="relative flex h-150 w-100 flex-col gap-1 overflow-hidden rounded-4xl border bg-white pt-3 shadow">
         <div className="pb-2 pl-4.25">
           <span className="text-lg font-semibold">Todo</span>
         </div>
@@ -39,13 +39,11 @@ export const MainPage: FC = () => {
             </>
           )}
           {!isOpenCompleted && completedTasks.length > 0 && (
-            <>
-              <CompletedList
-                isOpen={isOpenCompleted}
-                onToggle={setIsOpenCompleted}
-                tasks={completedTasks}
-              />
-            </>
+            <CompletedList
+              isOpen={isOpenCompleted}
+              onToggle={setIsOpenCompleted}
+              tasks={completedTasks}
+            />
           )}
         </div>
       </div>

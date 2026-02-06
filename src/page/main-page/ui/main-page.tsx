@@ -12,8 +12,6 @@ export const MainPage: FC = () => {
 
   const [isOpenCompleted, setIsOpenCompleted] = useState(false);
 
-  console.log(isOpenCompleted);
-
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#f5f5f5]">
       <div className="relative flex h-150 w-100 flex-col gap-1 overflow-hidden rounded-4xl border bg-white pt-3 shadow">

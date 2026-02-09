@@ -1,14 +1,43 @@
-import { useState, type FC } from 'react';
+import {
+  closestCenter,
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core';
+import { restrictToVerticalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { useState } from 'react';
 
 import { useTodoStore } from '@/feature/todo';
 import { cn } from '@/shared/lib/utils/utils';
 import { CompletedList } from '@/widget/completed-list';
 import { TodoList } from '@/widget/todo-list';
 
+import type { FC } from 'react';
+
 export const MainPage: FC = () => {
   const tasks = useTodoStore((s) => s.tasks);
-  const completedTasks = tasks.filter((item) => item.isCompleted);
-  const ActivityTasks = tasks.filter((item) => !item.isCompleted);
+  const reorderTasks = useTodoStore((s) => s.reorderTasks);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    reorderTasks(active.id as string, over.id as string);
+  };
+
+  const activeTasks = tasks.filter((t) => !t.isCompleted);
+  const completedTasks = tasks.filter((t) => t.isCompleted);
 
   const [isOpenCompleted, setIsOpenCompleted] = useState(false);
 
@@ -25,7 +54,14 @@ export const MainPage: FC = () => {
             !isOpenCompleted && completedTasks.length > 0 && 'pb-14'
           )}
         >
-          <TodoList tasks={ActivityTasks} />
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+            modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+          >
+            <TodoList tasks={activeTasks} />
+          </DndContext>
           {isOpenCompleted && completedTasks.length > 0 && (
             <>
               <hr className="-mx-4" />

@@ -52,14 +52,12 @@ export const CompletedList: FC<CompletedListProps> = ({ tasks, isOpen, onToggle 
             <TrashIcon />
           </Button>
         </AccordionTrigger>
-
         <AccordionContent>
           <div className="flex flex-col gap-1">
             {tasks.map((task) => (
               <TodoItem
                 key={task.id}
-                text={task.text}
-                isCompleted={task.isCompleted}
+                task={task}
                 onSubmit={(text, isCompleted) => updateTask(task.id, text, isCompleted)}
                 rightAction={<RemoveTodoButton todoId={task.id} />}
               />

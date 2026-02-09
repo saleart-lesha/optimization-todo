@@ -1,1 +1,1 @@
-export type { TodoItemProps } from './types';
+export type { TodoItemProps, Task } from './types';

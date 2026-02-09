@@ -1,3 +1,4 @@
+import { arrayMove } from '@dnd-kit/sortable';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -49,6 +50,19 @@ export const useTodoStore = create<TodoStore>()(
         set((state) => ({
           tasks: state.tasks.filter((task) => !task.isCompleted),
         }));
+      },
+
+      reorderTasks: (activeId, overId) => {
+        set((state) => {
+          const oldIndex = state.tasks.findIndex((t) => t.id === activeId);
+          const newIndex = state.tasks.findIndex((t) => t.id === overId);
+
+          if (oldIndex < 0 || newIndex < 0) return state;
+
+          return {
+            tasks: arrayMove(state.tasks, oldIndex, newIndex),
+          };
+        });
       },
     }),
     {

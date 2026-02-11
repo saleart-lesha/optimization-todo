@@ -55,6 +55,7 @@ export const TodoItem: FC<TodoItemProps> = ({ rightAction, onCancel, onSubmit, i
           className="cursor-pointer rounded-full p-1"
           variant={'ghost'}
           size={'none'}
+          data-testid={`checkbox-${task.id}`}
         >
           {task.isCompleted ? <CheckIcon /> : <Circle />}
         </Button>

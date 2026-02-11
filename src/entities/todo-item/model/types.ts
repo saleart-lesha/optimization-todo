@@ -1,5 +1,3 @@
-import type { Task } from '@/feature/todo';
-
 import type { ReactNode } from 'react';
 
 export type Task = {

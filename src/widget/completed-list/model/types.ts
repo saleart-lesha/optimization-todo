@@ -1,4 +1,4 @@
-import type { Task } from '@/feature/todo';
+import type { Task } from '@/entities/todo-item';
 
 export type CompletedListProps = {
   tasks: Task[];
